@@ -1,0 +1,14 @@
+@import '_variables.scss';
+
+h1 {
+	font-size: 32px;
+	@media screen and (max-width: $breakSp) {
+		font-size: 20px;
+	}
+}
+p {
+	font-size: 16px;
+	@media screen and (max-width: $breakSp) {
+		font-size: 12px;
+	}
+}

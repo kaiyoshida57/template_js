@@ -1,0 +1,24 @@
+extends _tmpl/_tmpl
+
+block param
+	- var page = "top";
+	- var title = "Topページ";
+	- var keywords = "";
+	- var description = "Webサイトです。";
+	- var ogUrl = "";
+	- var ogTitle = "Topページ";
+	- var ogType = "website";
+	- var ogDescription = "Webサイトです。";
+	- var ogImage = "/img/icon.png";
+
+block stylesheet
+	link(rel="stylesheet", href="/assets/css/top/top.css")
+
+block contents
+	include ./_include/_header
+	main
+		h1 h1h1h1!!
+		p ppp
+
+block script
+	script(src='/assets/js/bundle.js')
