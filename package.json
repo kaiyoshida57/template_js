@@ -28,6 +28,8 @@
     "gulp-sass": "^4.0.2",
     "gulp-sass-glob": "^1.0.9",
     "gulp-uglify-es": "^1.0.4",
+    "html-min": "0.0.4",
+    "html-minifier": "^4.0.0",
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-pngquant": "^7.0.0",
     "webpack": "^4.30.0",

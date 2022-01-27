@@ -1,7 +1,8 @@
 
 const gulp = require("gulp");
 const browserSync = require("browser-sync");
-const pug = require("gulp-pug");
+// const pug = require("gulp-pug");
+const htmlMin = require("gulp-htmlmin");
 const ssi = require("connect-ssi");
 const sass = require("gulp-sass");
 const autoprefixer = require("gulp-autoprefixer");
@@ -23,7 +24,7 @@ const webpackConfig = require("./webpack.config");
 const paths = {
 	rootDir: "dist/",
 	htmlSrc: "src/*.html",
-	pugSrc: ["src/pug/*.pug", "src/pug/**/*.pug", "!src/pug/_*/_*.pug","!src/pug/_*.pug"],
+	// pugSrc: ["src/pug/*.pug", "src/pug/**/*.pug", "!src/pug/_*/_*.pug","!src/pug/_*.pug"],
 	scssSrc: "src/scss/**/*.scss",
 	jsSrc: "src/js/**/*.js",
 	imgSrc: "src/img/**/*",
@@ -54,13 +55,19 @@ function browserSyncFunc(done){
 
 // html
 function htmlFunc() {
-	return gulp.src(paths.pugSrc)
+	return gulp.src(paths.htmlSrc)
 		.pipe(plumber({
 			errorHandler: notify.onError('<%= error.message %>'),
 		}))
-		.pipe(pug({
-			pretty: true
-		}))
+		.pipe(
+			htmlMin({
+				//HTMLの圧縮
+				removeComments: true, //コメントを削除
+				collapseWhitespace: true, //余白を詰める
+				preserveLineBreaks: true, //タグ間の改行を詰める
+				removeEmptyAttributes: false //空属性を削除しない
+			})
+		)
 		.pipe(gulp.dest(paths.outHtml))
 		.pipe(browserSync.stream());
 };
@@ -121,7 +128,7 @@ function imgFunc() {
 // watch
 function watchFunc(done) {
 	// gulp.watch(paths.htmlSrc, gulp.parallel(htmlFunc));
-	gulp.watch(paths.pugSrc, gulp.parallel(htmlFunc));
+	gulp.watch(paths.htmlSrc, gulp.parallel(htmlFunc));
 	gulp.watch(paths.scssSrc, gulp.parallel(sassFunc));
 	gulp.watch(paths.jsSrc, gulp.parallel(jsFunc));
 	gulp.watch(paths.imgSrc, gulp.parallel(imgFunc));
@@ -131,7 +138,7 @@ function watchFunc(done) {
 	// scripts tasks
 gulp.task('default',
 gulp.parallel(
-	browserSyncFunc, watchFunc, htmlFunc, sassFunc, jsFunc,imgFunc
+		browserSyncFunc, watchFunc, htmlFunc, sassFunc, jsFunc,imgFunc
 	)
 );
 
