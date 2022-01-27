@@ -10,3 +10,6 @@ gulp v3.9.1 or 4.0.2
 
 # Sass Package
 node sass
+
+# その他
+・webp画像は、htaccessで一括で読み込ませる。
