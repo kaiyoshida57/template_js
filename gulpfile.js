@@ -16,6 +16,8 @@ const uglify = require("gulp-uglify-es").default;
 const imagemin = require("gulp-imagemin");
 const mozjpeg = require("imagemin-mozjpeg");
 const pngquant = require("imagemin-pngquant");
+const webp = require('gulp-webp');
+const rename = require('gulp-rename'); //webp生成時のリネーム
 const changed = require("gulp-changed");
 const webpackStream = require("webpack-stream");
 const webpack = require("webpack");
@@ -23,11 +25,12 @@ const webpackConfig = require("./webpack.config");
 
 const paths = {
 	rootDir: "dist/",
-	htmlSrc: "src/*.html",
+	htmlSrc: "src/**/*.html",
 	// pugSrc: ["src/pug/*.pug", "src/pug/**/*.pug", "!src/pug/_*/_*.pug","!src/pug/_*.pug"],
 	scssSrc: "src/scss/**/*.scss",
 	jsSrc: "src/js/**/*.js",
 	imgSrc: "src/img/**/*",
+	jpgPngSrc: "src/img/**/*.{jpg,jpeg,png}",
 	outCss: "dist/assets/css",
 	outJs: "dist/assets/js",
 	outImg: "dist/assets/img",
@@ -111,7 +114,6 @@ function jsFunc() {
 function imgFunc() {
 	return gulp.src(paths.imgSrc)
 	.pipe(changed(paths.outImg))
-	.pipe(gulp.dest(paths.outImg))
 	.pipe(imagemin(
 		[
 			mozjpeg({
@@ -123,6 +125,18 @@ function imgFunc() {
 			verbose: true
 		}
 	))
+	.pipe(gulp.dest(paths.outImg))
+}
+
+// to webp
+function webpFunc() {
+	return gulp.src(paths.jpgPngSrc)
+	//jpg->webpじゃなく、jpg->jpg.webpの形に変換させる
+	.pipe(rename(function(path) {
+	path.basename += path.extname;
+	}))
+	.pipe(webp())
+	.pipe(gulp.dest(paths.outImg))
 }
 
 // watch
@@ -132,13 +146,14 @@ function watchFunc(done) {
 	gulp.watch(paths.scssSrc, gulp.parallel(sassFunc));
 	gulp.watch(paths.jsSrc, gulp.parallel(jsFunc));
 	gulp.watch(paths.imgSrc, gulp.parallel(imgFunc));
+	gulp.watch(paths.jpgPngSrc, gulp.parallel(webpFunc));
 	done();
 }
 
 	// scripts tasks
 gulp.task('default',
 gulp.parallel(
-		browserSyncFunc, watchFunc, htmlFunc, sassFunc, jsFunc,imgFunc
+		browserSyncFunc, watchFunc, htmlFunc, sassFunc, jsFunc,imgFunc, webpFunc
 	)
 );
 
