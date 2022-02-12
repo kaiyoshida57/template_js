@@ -30,7 +30,8 @@ dt,
 table,
 td,
 th {
-	margin: 0
+	margin: 0;
+	padding: 0;
 }
 
 ul,ol {
@@ -89,6 +90,7 @@ button {
 
 table {
 	width: 100%;
+	border-spacing: 0;
 }
 
 @media(prefers-reduced-motion:reduce) {
