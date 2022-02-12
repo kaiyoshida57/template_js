@@ -111,7 +111,7 @@ function imgFunc() {
 	.pipe(imagemin(
 	[
 		mozjpeg({
-			quality: 80 //画像圧縮率
+			quality: 85 //画像圧縮率
 		}),
 		pngquant()
 	],

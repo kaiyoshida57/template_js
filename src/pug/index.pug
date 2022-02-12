@@ -11,6 +11,19 @@ block param
 	- var ogDescription = "Webサイトです。";
 	- var ogImage = "/img/icon.png";
 
+block headScript
+	script(type="application/ld+json").
+		{
+			"@context": "https://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [{
+				"@type": "ListItem",
+				"position": 1,
+				"name": "TOP",
+				"item": "https://cc.tsunagu-grp.jp/"
+			}]
+		}
+
 block stylesheet
 	link(rel="stylesheet", href="/assets/css/top/top.css")
 

@@ -24,16 +24,15 @@ select,
 figure,
 blockquote,
 div,
+ul,
+ol
+li,
 dd,
 dl,
 dt,
 table,
 td,
 th {
-	margin: 0
-}
-
-ul,ol {
 	margin: 0;
 	padding: 0;
 }
@@ -89,6 +88,7 @@ button {
 
 table {
 	width: 100%;
+	border-spacing: 0;
 }
 
 @media(prefers-reduced-motion:reduce) {
