@@ -4,14 +4,14 @@ const browserSync = require("browser-sync");
 const pug = require("gulp-pug");
 const ssi = require("connect-ssi");
 const sass = require("gulp-sass");
-const autoprefixer = require("gulp-autoprefixer");
+// const autoprefixer = require("gulp-autoprefixer");
 const postcss = require("gulp-postcss"); // css-mqpackerを使うために必要
 const mqpacker = require('css-mqpacker'); // メディアクエリをまとめる
 const glob = require("gulp-sass-glob");
 const notify = require("gulp-notify");
 const plumber = require("gulp-plumber");
 const babel = require("gulp-babel");
-const uglify = require("gulp-uglify-es").default;
+const uglify = require("gulp-uglify-es").default; //ES6の圧縮用
 const imagemin = require("gulp-imagemin");
 const mozjpeg = require("imagemin-mozjpeg");
 const pngquant = require("imagemin-pngquant");
@@ -21,6 +21,7 @@ const changed = require("gulp-changed");
 const webpackStream = require("webpack-stream");
 const webpack = require("webpack");
 const webpackConfig = require("./webpack.config");
+const eslint = require('gulp-eslint');
 
 const paths = {
 	rootDir: "dist/",
@@ -67,7 +68,7 @@ function htmlFunc() {
 		}))
 		.pipe(gulp.dest(paths.outHtml))
 		.pipe(browserSync.stream());
-};
+}
 
 // sass
 function sassFunc() {
@@ -94,6 +95,14 @@ function sassFunc() {
 }
 
 // js
+// eslint処理
+function jsLintFunc() {
+	return gulp.src(['src/**/*.js','!node_modules/**'])
+		.pipe(eslint({ useEslintrc: true, fix: true }))
+		.pipe(eslint.format()) // ターミナルにログ出力
+		// .pipe(eslint.failAfterError()) //処理を止めてエラー出力
+}
+
 function jsFunc() {
 	return plumber({
 		errorHandler: notify.onError('<%= error.message %>'),
@@ -138,6 +147,7 @@ function watchFunc(done) {
 	// gulp.watch(paths.htmlSrc, gulp.parallel(htmlFunc));
 	gulp.watch(paths.pugWatchSrc, gulp.parallel(htmlFunc));
 	gulp.watch(paths.scssSrc, gulp.parallel(sassFunc));
+	gulp.watch(paths.jsSrc, gulp.parallel(jsLintFunc));
 	gulp.watch(paths.jsSrc, gulp.parallel(jsFunc));
 	gulp.watch(paths.imgSrc, gulp.parallel(imgFunc));
 	gulp.watch(paths.jpgPngSrc, gulp.parallel(webpFunc));
@@ -147,7 +157,7 @@ function watchFunc(done) {
 	// scripts tasks
 gulp.task('default',
 gulp.parallel(
-	browserSyncFunc, watchFunc, htmlFunc, sassFunc, jsFunc, imgFunc, webpFunc
+	browserSyncFunc, watchFunc, htmlFunc, sassFunc, jsLintFunc, jsFunc, imgFunc, webpFunc
 	)
 );
 
