@@ -4,7 +4,7 @@
 
 h1 {
 	font-size: 32px;
-	@media screen and (max-width: $breakSp) {
+	@include responsive(md) {
 		font-size: 20px;
 	}
 }
