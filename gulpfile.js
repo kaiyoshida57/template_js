@@ -29,7 +29,7 @@ const paths = {
 	htmlSrc: "src/**/*.html",
 	// pugSrc: ["src/pug/*.pug", "src/pug/**/*.pug", "!src/pug/_*/_*.pug","!src/pug/_*.pug"],
 	scssSrc: "src/scss/**/*.scss",
-	jsSrc: "src/js/**/*.js",
+	jsSrc: ["src/js/**/*.js","src/js/**/*.ts",],
 	imgSrc: "src/img/**/*",
 	jpgPngSrc: "src/img/**/*.{jpg,jpeg,png}",
 	outCss: "dist/assets/css",
@@ -116,7 +116,8 @@ function jsFunc() {
 	.pipe(webpackStream(webpackConfig, webpack))
 	.pipe(babel())
 	.pipe(uglify({}))
-	.pipe(gulp.dest(paths.outJs));
+	.pipe(gulp.dest(paths.outJs))
+	.pipe(browserSync.stream());
 }
 
 // img
@@ -160,10 +161,10 @@ function watchFunc(done) {
 	done();
 }
 
-	// scripts tasks
+// scripts tasks
 gulp.task('default',
 gulp.parallel(
-		browserSyncFunc, watchFunc, htmlFunc, sassFunc, jsLintFunc, jsFunc,imgFunc, webpFunc
+	browserSyncFunc, watchFunc, htmlFunc, sassFunc, jsLintFunc, jsFunc, imgFunc, webpFunc
 	)
 );
 
