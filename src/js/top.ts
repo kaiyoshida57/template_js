@@ -1,4 +1,4 @@
-import {Item} from './_modules/item';
-var elem = document.getElementById('output');
-var aBook = new Item('はじめてのTypeScript', 980);
-aBook.say(elem);
+import {tab} from './_modules/tab';
+
+// ID指定して発動
+tab('tab');

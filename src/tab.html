@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>tabページ</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="Webサイトです。">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="Topページ">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Webサイトです。">
+    <meta property="og:image" content="/img/icon.png">
+    <meta property="og:site_name" content="サイト名">
+    <meta property="og:locale" content="ja_JP">
+    <link rel="icon" href="/assets/img/common/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/img/common/apple-touch-icon.png" sizes="180x180">
+    <link rel="shortcut icon" href="/assets/img/common/favicon.ico" type="image/svg+xml" sizes="any">
+		<!-- <script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "BreadcrumbList",
+				"itemListElement": [{
+					"@type": "ListItem",
+					"position": 1,
+					"name": "TOP",
+					"item": "https://sample.jp/"
+				}]
+			}
+    </script> -->
+    <link rel="stylesheet" href="/assets/css/common/common.css">
+    <link rel="stylesheet" href="/assets/css/top/top.css">
+  </head>
+  <body id="body">
+    <div class="wrapper">
+      <header class="header" id="header">
+        <div class="header_inner"><a class="header_logo" href="/" aria-label="Site Logo">
+            <h1><img src="/assets/img/common/apple-touch-icon.png" alt="logo" width="60" loading="eager"></h1></a>
+          <nav class="header_navi" aria-label="Main menu">
+            <ul>
+              <li><a href="/service/">サービス</a><a href="/company/">会社情報</a><a href="/company/">会社情報</a><a href="/company/">会社情報</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+      <main>
+
+				<div id="tab" class="tab">
+					<!-- タブボタン -->
+					<ul role="tablist" class="tab__list">
+						<li role="presentation" class="tab__list-item">
+							<button role="tab" aria-controls="panel1" aria-selected="true" tabindex="0" class="tab__button">Tab1</button>
+						</li>
+						<li role="presentation" class="tab__list-item">
+							<button role="tab" aria-controls="panel2" aria-selected="false" tabindex="-1" class="tab__button">Tab2</button>
+						</li>
+						<li role="presentation" class="tab__list-item">
+							<button role="tab" aria-controls="panel3" aria-selected="false" tabindex="-1" class="tab__button">Tab3</button>
+						</li>
+					</ul>
+
+					<!-- タブコンテント -->
+					<div id="panel1" role="tabpanel" aria-hidden="false" tabindex="0" class="tab__panel">
+						<p class="tab__panel-text">Panel1 Content<br>メロスは激怒した。必ず、かの邪智暴虐じゃちぼうぎゃくの王を除かなければならぬと決意した。メロスには政治がわからぬ。メロスは、村の牧人である。笛を吹き、羊と遊んで暮して来た。けれども邪悪に対しては、人一倍に敏感であった。</p>
+					</div>
+					<div id="panel2" role="tabpanel" aria-hidden="true" tabindex="0" class="tab__panel">
+						<p class="tab__panel-text">Panel2 Content<br>
+							私わたくしはその人を常に先生と呼んでいた。だからここでもただ先生と書くだけで本名は打ち明けない。これは世間を憚はばかる遠慮というよりも、その方が私にとって自然だからである。私はその人の記憶を呼び起すごとに、すぐ「先生」といいたくなる。筆を執とっても心持は同じ事である。よそよそしい頭文字かしらもじなどはとても使う気にならない。</p>
+					</div>
+					<div id="panel3" role="tabpanel" aria-hidden="true" tabindex="0" class="tab__panel">
+						<p class="tab__panel-text">Panel3 Content<br>親譲おやゆずりの無鉄砲むてっぽうで小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰こしを抜ぬかした事がある。なぜそんな無闇むやみをしたと聞く人があるかも知れぬ。別段深い理由でもない。新築の二階から首を出していたら、同級生の一人が冗談じょうだんに、いくら威張いばっても、そこから飛び降りる事は出来まい。</p>
+					</div>
+				</div>
+
+      </main>
+    </div>
+    <script src="/assets/js/common.bundle.js"></script>
+    <script src="/assets/js/top.bundle.js"></script>
+  </body>
+</html>

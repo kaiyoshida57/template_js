@@ -1,0 +1,49 @@
+@import '_variables.scss';
+
+/* ==== tab ==== */
+
+
+.tab {
+  max-width: 780px;
+	margin: 80px auto 0;
+	padding: 40px 20px;
+	border: solid 2px #dadada;
+}
+
+.tab__list {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.tab__list-item {
+  &:not(:first-child) {
+    margin-left: 5px;
+  }
+}
+
+.tab__button {
+  font-size: 18px;
+  background: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+
+  &[aria-selected="true"] {
+    font-weight: bold;
+    border-bottom: 2px solid #5492ff;
+  }
+}
+
+.tab__panel {
+  &[aria-hidden="true"] {
+    display: none;
+  }
+  &[aria-hidden="false"] {
+    display: block;
+  }
+}
+
+.tab__panel-text {
+  font-size: 16px;
+  line-height: 1.5;
+}
